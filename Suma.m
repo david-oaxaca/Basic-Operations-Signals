@@ -1,5 +1,8 @@
 function [resultadoS, niS] = Suma(x,y,nix, niy)
-    
+    x=[1,2,3,4,5,6,7,8,9,10];
+    y=[1,2,3,4,5,6];
+    nix=6;
+    niy=4;
             %tamaño del vector X y del vector Y
             tam_x = length(x);
             tam_y = length(y);
@@ -24,24 +27,38 @@ function [resultadoS, niS] = Suma(x,y,nix, niy)
                 ceros_derecha = abs(dif_ladox - dif_ladoy);
                 ceros_izquierda = abs(nix - niy);
                 if(nix < niy)   %si la posición inicial del vector x es menor que la de y
-                    for i=1:ceros_derecha
-                        y = [y 0];  %agrega los ceros correspondientes a la derecha de y
+                    if(dif_ladox < dif_ladoy)
+                        for i=1:ceros_derecha
+                            x = [x 0];  %agrega los ceros correspondientes a la derecha de x
+                        end
+                    elseif(dif_ladoy < dif_ladox)
+                        for i=1:ceros_derecha
+                            y = [y 0];  %agrega los ceros correspondientes a la derecha de y
+                        end
                     end
                     for i=1:ceros_izquierda
-                        x = [0 x];  % y los ceros correspondientes a la izquiera de x
+                        x = [0 x];  %agrega los ceros correspondientes a la izquierda de x
                     end
-                    ni_vec = niy;   %la posicion inicial de nuevo vector es la más grande original
+                    vec = x + y;     %ahora que los vectores son iguales, se suman
+                    ni_vec = niy;
                 elseif(niy < nix)
-                    for i=1:ceros_derecha
-                        x = [x 0];
+                    if(dif_ladox < dif_ladoy)
+                        for i=1:ceros_derecha
+                            x = [x 0];  %agrega los ceros correspondientes a la derecha de x
+                        end
+                    elseif(dif_ladoy < dif_ladox)
+                        for i=1:ceros_derecha
+                            y = [y 0];  %agrega los ceros correspondientes a la derecha de y
+                        end
                     end
                     for i=1:ceros_izquierda
-                        y = [0 y];
+                        y = [0 y];  %agrega los ceros correspondientes a la izquierda de y
                     end
-                    ni_vec = nix; %la posicion inicial de nuevo vector es la más grande original
+                    vec = x + y;     %ahora que los vectores son iguales, se suman
+                    ni_vec = nix;
                 end
-                vec = x+y;  %una vez que las longitudes de los vectores son iguales se suman
             end
+                
             
             ni = ni_vec;
             ni = -ni;
@@ -49,4 +66,8 @@ function [resultadoS, niS] = Suma(x,y,nix, niy)
             
             resultadoS = vec;
             niS = ni;
+            x
+            y
+            vec
+            ni
         end
